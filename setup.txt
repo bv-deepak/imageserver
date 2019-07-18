@@ -1,0 +1,30 @@
+Steps to setup and install storeserver
+
+How to install Go:
+
+1. Download latest Go package from : https://golang.org
+2. Untar it using: tar -C /usr/local -xzf go1.8.linux-amd64.tar.gz
+3. Add path to bashrc : 
+	export PATH=$PATH:/usr/local/go/bin                                                                                                                                                        
+	export GOPATH=$HOME/storeserver                                                                                                                                                            
+	export PATH=$PATH:$GOPATH/bin
+4. For logger run : go get -u github.com/cihub/seelog 
+
+
+How to run storeserver:
+
+Go to storeserver repo.
+1. ./configure
+	After configure check config/server_config.json to correct paths.
+2. make
+3. production : make install
+	
+4. Run your service:
+
+	In Production set following alias:
+	alias gres="sudo service bvs2 restart"
+	alias gstop="sudo service bvs2 stop"
+	alias gstat="systemctl status bvs2.service"
+
+	In development: 
+	./bin/bvs2

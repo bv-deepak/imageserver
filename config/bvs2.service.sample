@@ -1,0 +1,18 @@
+[Unit]
+Description=BlogVault: StoreServer
+After=network.target
+
+[Service]
+Type=simple
+User=##USR##
+Group=##GRP##
+Restart=always
+WorkingDirectory=##PWD##
+ExecStart=##PWD##/bin/bvs2
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+KillMode=process
+SyslogIdentifier=BVS2
+
+[Install]
+WantedBy=multi-user.target

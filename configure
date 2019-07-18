@@ -1,0 +1,40 @@
+#!/bin/bash
+
+UNIT_FILE="$PWD/config/bvs2.service"
+UNIT_FILE_SAMPLE="$PWD/config/bvs2.service.sample"
+LOG_CONF_FILE="$PWD/config/log.xml"
+LOG_CONF_FILE_SAMPLE="$PWD/config/log.xml.sample"
+SERVER_CONF_FILE="$PWD/config/server_config.json"
+SERVER_CONF_FILE_SAMPLE="$PWD/config/server_config.json.sample"
+BVS2PATH=$GOPATH/src/
+LOG_PATH=$PWD/logs/server.log
+
+echoerr() { 
+	echo -e "\033[0;31mError: $@\033[0m" 1>&2;
+}
+
+echoinfo() {
+	echo -e "\033[0;32mInfo: $@\033[0m"
+}
+
+echoinfo "Configuring systemd unit file."
+if [ ! -f "$UNIT_FILE_SAMPLE" ]; then
+	echoerr "Template( $UNIT_FILE_SAMPLE ) File is missing"
+	exit 1
+fi
+cat $UNIT_FILE_SAMPLE | sed -e "s@##USR##@$USER@" | sed -e "s@##GRP##@$USER@" | sed -e "s@##PWD##@$PWD@g" > $UNIT_FILE
+echoinfo "Configuring server log file."
+if [ ! -f "$LOG_CONF_FILE_SAMPLE" ]; then
+	echoerr "Template( $LOG_CONF_FILE_SAMPLE ) File is missing"
+	exit 1
+fi
+cat $LOG_CONF_FILE_SAMPLE | sed -e "s@##LOGPATH##@$LOG_PATH@g" > $LOG_CONF_FILE
+
+echoinfo "Configuring server config file."
+if [ ! -f "$SERVER_CONF_FILE_SAMPLE" ]; then
+	echoerr "Template( $SERVER_CONF_FILE_SAMPLE ) File is missing"
+	exit 1
+fi
+cat $SERVER_CONF_FILE_SAMPLE | sed -e "s@##HOME##@$HOME@g" > $SERVER_CONF_FILE
+
+echoinfo "Configuration is completed."

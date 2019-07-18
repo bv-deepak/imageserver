@@ -1,0 +1,7 @@
+{
+  "Basepath" : "/var/www/html/imagestore",
+  "Storepath" : "/var/www/html/imagestore",
+  "StorepathRegex" : "^/var/www/html/imagestore/\\w*/\\w*/\\w*/\\w*",
+  "ValidIPs" : [ "127.0.0.1", "78.46.21.221", "144.76.197.43", "148.251.246.209", "148.251.232.213", "5.9.22.106", "5.9.14.228"]
+}
+

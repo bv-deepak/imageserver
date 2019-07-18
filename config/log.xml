@@ -1,0 +1,14 @@
+<seelog type="adaptive" mininterval="2000000" maxinterval="100000000" critmsgcount="500" minlevel="info">
+	<outputs>
+		<filter levels="error,critical,debug" formatid="fmterror">
+			<file path="/home/deep/imageserver/logs/server.log"/>
+		</filter>
+		<filter levels="info" formatid="fmtinfo">
+			<file path="/home/deep/imageserver/logs/server.log"/>
+		</filter>
+	</outputs>
+	<formats>
+		<format id="fmtinfo" format="%LEVEL : %Date : %Time XXXX %Msg%n"/>
+		<format id="fmterror" format="%LEVEL : %Date : %Time : %FuncShort : %File : %Line XXXX %Msg%n"/>
+	</formats>
+</seelog>

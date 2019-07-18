@@ -1,0 +1,18 @@
+[Unit]
+Description=BlogVault: StoreServer
+After=network.target
+
+[Service]
+Type=simple
+User=deep
+Group=deep
+Restart=always
+WorkingDirectory=/home/deep/storeserver
+ExecStart=/home/deep/storeserver/bin/bvs2
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+KillMode=process
+SyslogIdentifier=BVS2
+
+[Install]
+WantedBy=multi-user.target
